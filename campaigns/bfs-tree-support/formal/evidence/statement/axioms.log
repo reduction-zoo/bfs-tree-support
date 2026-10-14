@@ -1,0 +1,24 @@
+'BFSTreeSupport.Goal' depends on axioms: [propext, Classical.choice, Quot.sound]
+def BFSTreeSupport.Goal : Prop :=
+∃ forward recover, BFSTreeSupport.Reduction forward recover
+def BFSTreeSupport.Reduction : (BFSTreeSupport.Profile → BFSTreeSupport.Horn) →
+  (BFSTreeSupport.Profile × Option (List Bool) → Option BFSTreeSupport.Tree) → Prop :=
+fun forward recover =>
+  Nonempty (Turing.TM2ComputableInPolyTime BFSTreeSupport.encodeProfile BFSTreeSupport.encodeHorn forward) ∧
+    Nonempty
+        (Turing.TM2ComputableInPolyTime BFSTreeSupport.encodeRecoveryInput
+          (BFSTreeSupport.encodeOption BFSTreeSupport.encodeTree) recover) ∧
+      (∃ bound,
+          ∀ (x : BFSTreeSupport.Profile),
+            (BFSTreeSupport.encodeHorn (forward x)).length ≤
+              Polynomial.eval (BFSTreeSupport.encodeProfile x).length bound) ∧
+        (∃ bound,
+            ∀ (input : BFSTreeSupport.Profile × Option (List Bool)),
+              (BFSTreeSupport.encodeOption BFSTreeSupport.encodeTree (recover input)).length ≤
+                Polynomial.eval (BFSTreeSupport.encodeRecoveryInput input).length bound) ∧
+          (∀ (x : BFSTreeSupport.Profile),
+              BFSTreeSupport.legalProfile x = true → BFSTreeSupport.legalHorn (forward x) = true) ∧
+            ∀ (x : BFSTreeSupport.Profile),
+              BFSTreeSupport.legalProfile x = true →
+                ∀ (y : Option (List Bool)),
+                  BFSTreeSupport.validTargetOutput (forward x) y → BFSTreeSupport.validSourceOutput x (recover (x, y))
