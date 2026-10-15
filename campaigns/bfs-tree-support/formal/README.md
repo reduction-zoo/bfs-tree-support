@@ -38,7 +38,8 @@ bijection or raw equality between source and target answers.
 
 ## Build and inspect
 
-Lean 4.34.0 and the exact Mathlib revision are pinned by `lean-toolchain`,
+Lean 4.35.0 and Mathlib tag `v4.35.0` (commit
+`56a005855ea17e0b0958f73ec801ae140b0a1679`) are pinned by `lean-toolchain`,
 `lakefile.toml` and `lake-manifest.json`. In this directory:
 
 ```sh
@@ -46,6 +47,11 @@ lake exe cache get Mathlib.Computability.TuringMachine.Computable
 LEAN_NUM_THREADS=2 lake build
 lake env lean Audit.lean
 ```
+
+The cache download requires network access on a fresh checkout; it can be
+omitted when the pinned dependencies and Mathlib cache are already present.
+`lake build` includes `Tests.lean`. The entry files use `module`, `public import`
+and `public section`; all problem definitions remain inlined in each file.
 
 Only the two open theorem placeholders should report `sorry`. The definitions
 and `Goal` have no proof holes. Compilation and semantic tests establish a
@@ -59,21 +65,50 @@ of `BFSTreeSupport.solve`; definitions in `Solution.lean` must stay identical to
 the trusted challenge and permits only `propext`, `Quot.sound`, and
 `Classical.choice`. An unfilled candidate must fail the axiom check for `sorryAx`.
 
-`verifier.toml` pins Comparator and lean4export. Follow the
-[upstream installation and sandbox instructions](https://github.com/leanprover/comparator/tree/d03acab154d269c06e60e4de7e4cc85deebff94b).
-On a supported Linux sandbox with those pinned tools installed, run:
+Lean 4.35.0 bundles `lake comparator`, its exporter, Lean's kernel checker and
+the independent NanoDa and con-ron kernels. No separate comparator checkout is
+needed. On Linux with `bubblewrap` (`bwrap`) installed, from this directory:
 
 ```sh
-systemd-run --user --wait --pipe --collect \
-  --property=RestrictAddressFamilies=~AF_UNIX -E PATH="$PATH" \
-  --working-directory="$PWD" -- \
-  lake env /path/to/comparator/.lake/build/bin/comparator comparator.json
+lake comparator --config comparator.json
+./scripts/verify-comparator.sh
 ```
 
-Comparator certification and an independent external kernel check have not been
-run for this open template. They cannot certify an unfilled solution. Human
-review must still establish that these fixed definitions express the intended
-question.
+The first command uses the unchanged strict axiom policy and must reject the
+unfilled solution with `error: Illegal axiom detected: 'sorryAx'`. Comparator
+checks the statement and its definitions before checking axioms.
+
+The script adapts [PalomarTemplate](https://github.com/PalomarRegistry/PalomarTemplate)'s
+verification with both bundled independent kernels enabled. It accepts either:
+
+- A completed solution accepted under the strict policy, including kernel replay.
+- The exact `sorryAx` rejection (exit 1), followed by full comparator acceptance
+  with **only** `sorryAx` temporarily added to a generated config. This second
+  pass rules out additional forbidden axioms and requires all three kernels to
+  accept. It verifies the open template, **not a proof**. `comparator.json` is
+  never relaxed or modified.
+
+Every other failure fails CI. The repo-root [Lean workflow](../../../.github/workflows/lean.yml)
+builds this subdirectory (including `Tests.lean`), audits `Goal`, tests the
+script on real small Lake projects, then runs it on this question. Thus green
+CI for the unfilled copy means a correctly posed open question; after a proof
+is filled in, strict comparator acceptance is required without a workflow edit.
+The script can be invoked from any working directory and uses the project's
+pinned toolchain. It does not download the Mathlib cache itself.
+
+macOS cannot run the required Linux namespace sandbox. The local build, audit
+and finite semantic evidence are in `evidence/statement/*.log`; sandboxed
+comparator and independent kernel verification await Linux CI. Human review
+must still establish that the definitions express the intended question.
+
+## Metadata and licensing
+
+`formalization.yaml` follows PalomarTemplate's v0.4 metadata shape and records
+the open statement, the unfilled solution and git authorship. This repository
+has **no LICENSE file** and no declared repository licence. The metadata says
+`unknown`; it does not grant Apache-2.0 or any other licence. An authorized
+licence decision and a LICENSE file are needed before a licensed Palomar
+submission; the template's Apache-only licence validator would reject this state.
 
 ## Semantic evidence
 

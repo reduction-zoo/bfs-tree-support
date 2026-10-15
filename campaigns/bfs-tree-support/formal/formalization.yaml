@@ -1,0 +1,97 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "BFS tree support to Horn satisfiability: open question"
+  description: >-
+    A standalone specification of a polynomial-time construction and universal
+    output recovery from FIFO BFS tree-support profiles to Horn satisfiability.
+    The question is open; no reduction or proof is supplied.
+  authors:
+    - "Xiwei Pan"
+    - "Claude Opus 5.5"
+  # No LICENSE file exists in this repository. This is not a licence grant.
+  license: "unknown"
+  responsible_maintainers:
+    - "Xiwei Pan"
+
+classification:
+  arxiv: ["cs.DM", "cs.CC"]
+  msc2020: ["05C05", "68Q25"]
+
+sources:
+  - title: "BFS tree support to Horn satisfiability: fixed campaign question"
+    id: "../question.md"
+    type: "problem statement"
+    relationship: "formalizes"
+    note: >-
+      The finite encodings and full construction/recovery contract are specified
+      here and in ../work/contract.md. Only the question is formalized.
+  - title: "When Graph Traversal Meets Structured Preferences: Unified Framework and Complexity Results"
+    authors: ["Rong", "Li", "Yang"]
+    id: "arXiv:2605.04701v1"
+    location: "https://arxiv.org/html/2605.04701v1"
+    type: "paper"
+    relationship: "background"
+    note: >-
+      Sections 1.2, 2.2 and 4.1 are cited by the fixed campaign record for the
+      BFS tree-support question and FIFO convention. No new literature review
+      or claim of a solution is made here.
+
+related_formalizations: []
+
+status:
+  scope: >-
+    Profile/tree and Horn semantics, explicit binary encodings, NO-SOLUTION
+    outputs and the polynomial-time reduction goal are defined. BFSTreeSupport.solve
+    in Challenge.lean has a deliberate sorry; Solution.lean is
+    an identical unfilled copy. There is no proof development beyond semantic
+    tests. Counts below exclude Challenge.lean and include Solution.lean.
+  sorry_count: 1
+  sorry_in_definitions: 0
+  axioms: ["propext", "Classical.choice", "Quot.sound", "sorryAx"]
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5", "GPT-6"]
+      framework: "Claude Code and Codex"
+      tool_setup: "AI-assisted specification and infrastructure; Lean, Mathlib and independent Python/Z3 semantic checks"
+      cost:
+        wall_time: "not tracked"
+        spend_usd: "not tracked"
+        hardware: "local macOS machine; Linux GitHub Actions configured"
+      prompting_notes: "Formalize the fixed open question faithfully; do not claim a reduction or proof."
+  spend_usd: "not tracked"
+  notes: >-
+    Xiwei Pan is the git author; Claude Opus 5.5 is recorded as a co-author of
+    the standalone statement commit. Codex adapted the toolchain verification
+    and CI. No autonomous search for a mathematical solution is claimed.
+
+fidelity:
+  divergences: >-
+    No known semantic divergence from the fixed campaign contract. The finite
+    semantic checks do not establish agreement for all inputs. The literature
+    source is background, not a theorem proved by this project.
+
+review:
+  status: "self-assessed; proof absent"
+  reviewers: []
+  notes: >-
+    Local build, Goal axiom audit and finite differential checks are recorded in
+    evidence/statement. The sandboxed comparator and independent kernel runs
+    require Linux CI and have not been run locally. No independent mathematical
+    review is claimed. Repository licensing is unspecified: a LICENSE file and
+    an authorized licence decision are missing; this is not a Palomar-ready
+    licensed submission.
+
+alignment:
+  namespace: "BFSTreeSupport"
+  statements:
+    - source: "Fixed question: Required result and Acceptance"
+      lean: "BFSTreeSupport.solve"
+      module: "Challenge"
+      status: "open; statement only"
+      note: "Type BFSTreeSupport.Goal; deliberate sorry, with an identical starting Solution.lean."
+
+acknowledgements: "Lean, Mathlib, the prepared Python/Z3 oracles, and PalomarTemplate's comparator/CI layout."

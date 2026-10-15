@@ -9,7 +9,11 @@ is deliberate. Comparator accepts `Solution.lean` only if it proves this
 theorem with the identical statement and identical definitions, using only the
 axioms propext, Quot.sound and Classical.choice.
 -/
-import Mathlib.Computability.TuringMachine.Computable
+module
+
+public import Mathlib.Computability.TuringMachine.Computable
+
+public section
 
 /-! The fixed problem, not a proposed reduction. Vertex and variable indices are
 zero-based. Every object has an explicit finite binary encoding below. -/

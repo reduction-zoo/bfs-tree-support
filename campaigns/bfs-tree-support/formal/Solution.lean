@@ -1,15 +1,19 @@
 /-
-Solution.lean: the untrusted starting copy of the Comparator statement of board question Q001,
+Challenge.lean: the trusted Comparator statement of board question Q001,
 BFS tree support → Horn satisfiability.
 
 This file is standalone. It imports only Mathlib and fixes the two problems,
 their finite binary encodings, NO-SOLUTION semantics and the exact reduction
-goal. Replace the `sorry` below with a proof; auxiliary lemmas may be
-added, but every definition above must stay identical to Challenge.lean. Comparator accepts `Solution.lean` only if it proves this
+goal. The theorem `BFSTreeSupport.solve` states the open question; its `sorry`
+is deliberate. Comparator accepts `Solution.lean` only if it proves this
 theorem with the identical statement and identical definitions, using only the
 axioms propext, Quot.sound and Classical.choice.
 -/
-import Mathlib.Computability.TuringMachine.Computable
+module
+
+public import Mathlib.Computability.TuringMachine.Computable
+
+public section
 
 /-! The fixed problem, not a proposed reduction. Vertex and variable indices are
 zero-based. Every object has an explicit finite binary encoding below. -/
