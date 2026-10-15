@@ -13,7 +13,7 @@ module
 
 public import Mathlib.Computability.TuringMachine.Computable
 
-public section
+@[expose] public section
 
 /-! The fixed problem, not a proposed reduction. Vertex and variable indices are
 zero-based. Every object has an explicit finite binary encoding below. -/

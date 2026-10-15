@@ -51,7 +51,10 @@ lake env lean Audit.lean
 The cache download requires network access on a fresh checkout; it can be
 omitted when the pinned dependencies and Mathlib cache are already present.
 `lake build` includes `Tests.lean`. The entry files use `module`, `public import`
-and `public section`; all problem definitions remain inlined in each file.
+and `@[expose] public section`; all problem definitions remain inlined in each
+file. `@[expose]` is required: without it, auxiliary constants such as `match`
+helpers are private and named after their module, so Comparator reports that
+the Challenge and Solution definitions differ.
 
 Only the two open theorem placeholders should report `sorry`. The definitions
 and `Goal` have no proof holes. Compilation and semantic tests establish a
