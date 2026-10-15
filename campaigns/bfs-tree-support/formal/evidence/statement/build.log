@@ -1,6 +1,6 @@
-⚠ [1239/1244] Replayed Challenge
-warning: Challenge.lean:6:8: declaration uses `sorry`
-⚠ [1241/1244] Replayed Solution
-warning: Solution.lean:6:8: declaration uses `sorry`
-✔ [1243/1244] Built Tests (815ms)
-Build completed successfully (1244 jobs).
+⚠ [1237/1242] Built Challenge (1.1s)
+warning: Challenge.lean:143:8: declaration uses `sorry`
+⚠ [1239/1242] Built Solution (1.1s)
+warning: Solution.lean:143:8: declaration uses `sorry`
+✔ [1241/1242] Built Tests (804ms)
+Build completed successfully (1242 jobs).

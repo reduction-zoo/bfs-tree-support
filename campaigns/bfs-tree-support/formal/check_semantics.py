@@ -19,7 +19,7 @@ def lean(value):
     return str(value)
 
 
-lines = ["import Definitions", "open BFSTreeSupport"]
+lines = ["import Challenge", "open BFSTreeSupport"]
 source_queries = 0
 cases = json.loads((WORK / "cases.json").read_text())
 for case in cases:

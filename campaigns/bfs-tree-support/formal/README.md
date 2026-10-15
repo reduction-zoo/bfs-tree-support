@@ -1,9 +1,10 @@
 # BFS tree support → Horn satisfiability
 
-This standalone Lake package defines the actual board question, not a proposed
-solution. `Definitions.lean` fixes the two problems, their finite encodings,
-NO-SOLUTION semantics, and the exact reduction goal. `Challenge.lean` names the
-open theorem `BFSTreeSupport.solve`. `Solution.lean` is its unfilled starting copy.
+This Lake package defines the actual board question, not a proposed solution.
+`Challenge.lean` is the standalone Comparator statement: it imports only Mathlib,
+fixes the two problems, their finite encodings, NO-SOLUTION semantics and the
+exact reduction goal, and states the open theorem `BFSTreeSupport.solve`.
+`Solution.lean` is its unfilled starting copy.
 
 ## Fixed meaning
 
@@ -53,7 +54,8 @@ well-formed specification, not a solution of the open question.
 ## Submit a solution to Comparator
 
 Keep every file except `Solution.lean` fixed. Replace its proof hole with a proof
-of `BFSTreeSupport.solve`. The configuration compares this statement against
+of `BFSTreeSupport.solve`; definitions in `Solution.lean` must stay identical to
+`Challenge.lean`. The configuration compares this statement against
 the trusted challenge and permits only `propext`, `Quot.sound`, and
 `Classical.choice`. An unfilled candidate must fail the axiom check for `sorryAx`.
 

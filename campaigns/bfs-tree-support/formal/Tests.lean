@@ -1,4 +1,4 @@
-import Definitions
+import Challenge
 
 open BFSTreeSupport
 
