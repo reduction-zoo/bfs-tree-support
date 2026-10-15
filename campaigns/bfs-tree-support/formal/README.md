@@ -108,11 +108,9 @@ must still establish that the definitions express the intended question.
 ## Metadata and licensing
 
 `formalization.yaml` follows PalomarTemplate's v0.4 metadata shape and records
-the open statement, the unfilled solution and git authorship. This repository
-has **no LICENSE file** and no declared repository licence. The metadata says
-`unknown`; it does not grant Apache-2.0 or any other licence. An authorized
-licence decision and a LICENSE file are needed before a licensed Palomar
-submission; the template's Apache-only licence validator would reject this state.
+the open statement, the unfilled solution and git authorship. The repository is
+licensed under Apache-2.0 ([`LICENSE`](../../../LICENSE) at the repository root),
+matching Mathlib, PalomarTemplate and the `project.license` metadata.
 
 ## Semantic evidence
 

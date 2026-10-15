@@ -10,8 +10,8 @@ project:
   authors:
     - "Xiwei Pan"
     - "Claude Opus 5.5"
-  # No LICENSE file exists in this repository. This is not a licence grant.
-  license: "unknown"
+  # Matches the Apache-2.0 LICENSE file at the repository root.
+  license: "Apache-2.0"
   responsible_maintainers:
     - "Xiwei Pan"
 
@@ -79,11 +79,9 @@ review:
   reviewers: []
   notes: >-
     Local build, Goal axiom audit and finite differential checks are recorded in
-    evidence/statement. The sandboxed comparator and independent kernel runs
-    require Linux CI and have not been run locally. No independent mathematical
-    review is claimed. Repository licensing is unspecified: a LICENSE file and
-    an authorized licence decision are missing; this is not a Palomar-ready
-    licensed submission.
+    evidence/statement. Linux CI runs the sandboxed comparator with Lean's kernel
+    and NanoDa on the open template; con-ron judges only a completed proof. No independent mathematical
+    review is claimed. The repository is licensed under Apache-2.0 (root LICENSE).
 
 alignment:
   namespace: "BFSTreeSupport"

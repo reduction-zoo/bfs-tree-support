@@ -9,3 +9,7 @@ Reproduce: `uv sync --locked`, then `uv run --locked python campaigns/bfs-tree-s
 The [standalone Lean definition and Comparator challenge](campaigns/bfs-tree-support/formal/README.md)
 fix the source/target semantics and polynomial-time reduction goal. This is a
 formal statement of the open question, not a solution.
+
+## License
+
+Apache-2.0; see [LICENSE](LICENSE).
