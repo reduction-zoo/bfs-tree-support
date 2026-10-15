@@ -1,0 +1,5 @@
+⚠ [1266/1271] Replayed Challenge
+warning: Challenge.lean:147:8: declaration uses `sorry`
+⚠ [1268/1271] Replayed Solution
+warning: Solution.lean:147:8: declaration uses `sorry`
+Build completed successfully (1271 jobs).
