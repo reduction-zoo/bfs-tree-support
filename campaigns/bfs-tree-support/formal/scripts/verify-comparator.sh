@@ -43,6 +43,9 @@ config["external_kernels"] = {
 Path(temporary, "strict.json").write_text(json.dumps(config) + "\n")
 # This temporary allowance verifies the open template, never certifies a proof.
 config["permitted_axioms"].append("sorryAx")
+# con-ron declines every sorryAx in --verified mode regardless of the policy, so
+# the open pass replays through nanoda and Lean's kernel; the strict pass uses all.
+del config["external_kernels"]["con-ron"]
 Path(temporary, "open.json").write_text(json.dumps(config) + "\n")
 PY
 

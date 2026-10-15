@@ -57,8 +57,12 @@ class ComparatorVerdictTests(unittest.TestCase):
                 self.assertEqual(result.returncode, expected_status, output)
                 if message:
                     self.assertIn(message, output)
-                    for kernel in ("Lean default", "nanoda", "con-ron"):
+                    # con-ron declines any sorryAx, so only the strict pass runs it.
+                    kernels = ("Lean default", "nanoda") + (("con-ron",) if name == "proved" else ())
+                    for kernel in kernels:
                         self.assertIn(f"{kernel} kernel accepts the solution", output)
+                    if name == "open":
+                        self.assertNotIn("con-ron", output)
                 if name == "extra_axiom":
                     self.assertIn("Illegal axiom detected: 'sorryAx'", output)
                     self.assertIn("Illegal axiom detected: 'untrusted'", output)

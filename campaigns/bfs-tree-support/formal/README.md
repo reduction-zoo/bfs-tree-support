@@ -84,8 +84,9 @@ verification with both bundled independent kernels enabled. It accepts either:
 - A completed solution accepted under the strict policy, including kernel replay.
 - The exact `sorryAx` rejection (exit 1), followed by full comparator acceptance
   with **only** `sorryAx` temporarily added to a generated config. This second
-  pass rules out additional forbidden axioms and requires all three kernels to
-  accept. It verifies the open template, **not a proof**. `comparator.json` is
+  pass rules out additional forbidden axioms and requires Lean's kernel and
+  NanoDa to accept; con-ron declines any `sorryAx` by design, so it judges only
+  the strict pass. It verifies the open template, **not a proof**. `comparator.json` is
   never relaxed or modified.
 
 Every other failure fails CI. The repo-root [Lean workflow](../../../.github/workflows/lean.yml)
